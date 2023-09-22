@@ -5,10 +5,11 @@
   page_require_level(2);
   $all_categories = find_all('categories');
   $all_photo = find_all('media');
+  $all_supplier = find_all('supplier');
 ?>
 <?php
  if(isset($_POST['add_product'])){
-   $req_fields = array('product-title','product-categorie','product-quantity','buying-price', 'saleing-price' );
+   $req_fields = array('product-title','product-categorie','product-quantity','buying-price', 'saleing-price', 'product-supplier' );
    validate_fields($req_fields);
    if(empty($errors)){
      $p_name  = remove_junk($db->escape($_POST['product-title']));
@@ -16,6 +17,7 @@
      $p_qty   = remove_junk($db->escape($_POST['product-quantity']));
      $p_buy   = remove_junk($db->escape($_POST['buying-price']));
      $p_sale  = remove_junk($db->escape($_POST['saleing-price']));
+     $p_supplier  = remove_junk($db->escape($_POST['product-supplier']));
      if (is_null($_POST['product-photo']) || $_POST['product-photo'] === "") {
        $media_id = '0';
      } else {
@@ -23,13 +25,13 @@
      }
      $date    = make_date();
      $query  = "INSERT INTO products (";
-     $query .=" name,quantity,buy_price,sale_price,categorie_id,media_id,date";
+     $query .=" name,quantity,buy_price,sale_price,categorie_id,media_id,date,supplier_id";
      $query .=") VALUES (";
-     $query .=" '{$p_name}', '{$p_qty}', '{$p_buy}', '{$p_sale}', '{$p_cat}', '{$media_id}', '{$date}'";
+     $query .=" '{$p_name}', '{$p_qty}', '{$p_buy}', '{$p_sale}', '{$p_cat}', '{$media_id}', '{$date}', '{$p_supplier}'";
      $query .=")";
      $query .=" ON DUPLICATE KEY UPDATE name='{$p_name}'";
      if($db->query($query)){
-       $session->msg('s',"Producto agregado exitosamente. ");
+       $session->msg('s',"Material agregado exitosamente. ");
        redirect('add_product.php', false);
      } else {
        $session->msg('d',' Lo siento, registro falló.');
@@ -72,7 +74,7 @@
               </div>
               <div class="form-group">
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-6" style="width: 300px !important;">
                     <select class="form-control" name="product-categorie">
                       <option value="">Selecciona una categoría</option>
                     <?php  foreach ($all_categories as $cat): ?>
@@ -81,12 +83,21 @@
                     <?php endforeach; ?>
                     </select>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-6" style="width: 300px !important;">
                     <select class="form-control" name="product-photo">
                       <option value="">Selecciona una imagen</option>
                     <?php  foreach ($all_photo as $photo): ?>
                       <option value="<?php echo (int)$photo['id'] ?>">
                         <?php echo $photo['file_name'] ?></option>
+                    <?php endforeach; ?>
+                    </select>
+                  </div>
+                  <div class="col-md-6" style="width: 300px !important;">
+                    <select class="form-control" name="product-supplier">
+                      <option value="">Selecciona un proveedor</option>
+                    <?php  foreach ($all_supplier as $sup): ?>
+                      <option value="<?php echo (int)$sup['id'] ?>">
+                        <?php echo $sup['name'] ?></option>
                     <?php endforeach; ?>
                     </select>
                   </div>
@@ -100,7 +111,7 @@
                      <span class="input-group-addon">
                       <i class="glyphicon glyphicon-shopping-cart"></i>
                      </span>
-                     <input type="number" class="form-control" name="product-quantity" placeholder="Cantidad">
+                     <input type="number" class="form-control" name="product-quantity" min="0" placeholder="Cantidad">
                   </div>
                  </div>
                  <div class="col-md-4">
@@ -108,7 +119,7 @@
                      <span class="input-group-addon">
                        <i class="glyphicon glyphicon-usd"></i>
                      </span>
-                     <input type="number" class="form-control" name="buying-price" placeholder="Precio de compra">
+                     <input type="number" class="form-control" name="buying-price" min="0" placeholder="Precio de compra">
                      <span class="input-group-addon">.00</span>
                   </div>
                  </div>
@@ -117,7 +128,7 @@
                       <span class="input-group-addon">
                         <i class="glyphicon glyphicon-usd"></i>
                       </span>
-                      <input type="number" class="form-control" name="saleing-price" placeholder="Precio de venta">
+                      <input type="number" class="form-control" name="saleing-price" min="0" placeholder="Precio de venta">
                       <span class="input-group-addon">.00</span>
                    </div>
                   </div>

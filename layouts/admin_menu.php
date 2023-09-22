@@ -1,19 +1,10 @@
+
 <ul>
   <li>
     <a href="admin.php">
       <i class="glyphicon glyphicon-home"></i>
-      <span>Panel de control</span>
+      <span>Inicio</span>
     </a>
-  </li>
-  <li>
-    <a href="#" class="submenu-toggle">
-      <i class="glyphicon glyphicon-user"></i>
-      <span>Accesos</span>
-    </a>
-    <ul class="nav submenu">
-      <li><a href="group.php">Administrar grupos</a> </li>
-      <li><a href="users.php">Administrar usuarios</a> </li>
-   </ul>
   </li>
   <li>
     <a href="categorie.php" >
@@ -23,12 +14,12 @@
   </li>
   <li>
     <a href="#" class="submenu-toggle">
-      <i class="glyphicon glyphicon-th-large"></i>
-      <span>Productos</span>
+      <i class="glyphicon glyphicon-shopping-cart"></i>
+      <span>Materiales</span>
     </a>
     <ul class="nav submenu">
-       <li><a href="product.php">Administrar productos</a> </li>
-       <li><a href="add_product.php">Agregar productos</a> </li>
+       <li><a href="product.php">Administrar materiales</a> </li>
+       <li><a href="add_product.php">Agregar materiales</a> </li>
    </ul>
   </li>
   <li>
@@ -57,5 +48,25 @@
         <li><a href="monthly_sales.php">Ventas mensuales</a></li>
         <li><a href="daily_sales.php">Ventas diarias</a> </li>
       </ul>
+  </li>
+  <li>
+    <a href="#" class="submenu-toggle">
+      <i class="glyphicon glyphicon-briefcase"></i>
+      <span>Proveedores</span>
+    </a>
+    <ul class="nav submenu">
+       <li><a href="supplier.php">Administrar proveedores</a> </li>
+       <li><a href="add_supplier.php">Agregar proveedores</a> </li>
+   </ul>
+  </li>
+  <li>
+    <a href="#" class="submenu-toggle">
+      <i class="glyphicon glyphicon-user"></i>
+      <span>Accesos</span>
+    </a>
+    <ul class="nav submenu">
+      <li><a href="group.php">Administrar grupos</a> </li>
+      <li><a href="users.php">Administrar usuarios</a> </li>
+   </ul>
   </li>
 </ul>

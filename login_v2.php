@@ -22,6 +22,7 @@
         <div class="form-group">
                 <button type="submit" class="btn btn-info  pull-right">Login</button>
         </div>
+        <span>Contraseña olvidada?</span>
     </form>
 </div>
 <?php include_once('layouts/header.php'); ?>

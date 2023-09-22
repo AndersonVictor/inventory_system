@@ -75,7 +75,12 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-info pull-right">LOGIN</button>
             </div>
+            <span style="float:right; font-size:14px; font-weight: 700; color: #0000 !important;"><a href="">¿Contraseña Olvidada?</a></span>
         </form>
+    </div>
+    <div class="popup-content">
+      <span class="close-button" id="closePopupButton">&times;</span>
+      <p>Comuníquese con el administrador</p>
     </div>
 </body>
 </html>

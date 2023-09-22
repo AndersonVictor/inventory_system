@@ -50,7 +50,7 @@
         </div>
         <div class="panel-value pull-right">
           <h2 class="margin-top"> <?php  echo $c_product['total']; ?> </h2>
-          <p class="text-muted">Productos</p>
+          <p class="text-muted">Materiales</p>
         </div>
        </div>
     </div>

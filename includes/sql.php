@@ -219,6 +219,19 @@ function tableExists($table){
     return find_by_sql($sql);
 
    }
+   /*--------------------------------------------------------------*/
+   /* Function for Finding all supplier name
+   /* JOIN with   and  database table
+   /*--------------------------------------------------------------*/
+   function join_supplier_table(){
+    global $db;
+    $sql  =" SELECT supplier.id,supplier.name,supplier.address,supplier.phone,supplier.email";
+   $sql  .=" FROM supplier";
+   $sql  .=" ORDER BY supplier.id ASC";
+   return find_by_sql($sql);
+
+  }
+
   /*--------------------------------------------------------------*/
   /* Function for Finding all product name
   /* Request coming from ajax.php for auto suggest
@@ -305,22 +318,25 @@ function find_recent_sale_added($limit){
 /*--------------------------------------------------------------*/
 /* Function for Generate sales report by two dates
 /*--------------------------------------------------------------*/
-function find_sale_by_dates($start_date,$end_date){
+function find_sale_by_dates($start_date, $end_date){
   global $db;
-  $start_date  = date("Y-m-d", strtotime($start_date));
-  $end_date    = date("Y-m-d", strtotime($end_date));
-  $sql  = "SELECT s.date, p.name,p.sale_price,p.buy_price,";
-  $sql .= "COUNT(s.product_id) AS total_records,";
-  $sql .= "SUM(s.qty) AS total_sales,";
-  $sql .= "SUM(p.sale_price * s.qty) AS total_saleing_price,";
-  $sql .= "SUM(p.buy_price * s.qty) AS total_buying_price ";
-  $sql .= "FROM sales s ";
-  $sql .= "LEFT JOIN products p ON s.product_id = p.id";
-  $sql .= " WHERE s.date BETWEEN '{$start_date}' AND '{$end_date}'";
-  $sql .= " GROUP BY DATE(s.date),p.name";
-  $sql .= " ORDER BY DATE(s.date) DESC";
+  $start_date = date("Y-m-d", strtotime($start_date));
+  $end_date   = date("Y-m-d", strtotime($end_date));
+
+  $sql  = "SELECT sales.date, products.name, products.sale_price, products.buy_price, ";
+  $sql .= "COUNT(sales.product_id) AS total_records, ";
+  $sql .= "SUM(sales.qty) AS total_sales, ";
+  $sql .= "SUM(products.sale_price * sales.qty) AS total_saleing_price, ";
+  $sql .= "SUM(products.buy_price * sales.qty) AS total_buying_price ";
+  $sql .= "FROM sales ";
+  $sql .= "LEFT JOIN products ON sales.product_id = products.id ";
+  $sql .= "WHERE sales.date BETWEEN '{$start_date}' AND '{$end_date}' ";
+  $sql .= "GROUP BY sales.date, products.name ";  // Corregido el alias de la tabla products
+  $sql .= "ORDER BY sales.date DESC ";
+
   return $db->query($sql);
 }
+
 /*--------------------------------------------------------------*/
 /* Function for Generate Daily sales report
 /*--------------------------------------------------------------*/

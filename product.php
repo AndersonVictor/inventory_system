@@ -1,5 +1,5 @@
 <?php
-  $page_title = 'Lista de productos';
+  $page_title = 'Lista de materiales';
   require_once('includes/load.php');
  
    page_require_level(2);
@@ -14,7 +14,7 @@
       <div class="panel panel-default">
         <div class="panel-heading clearfix">
          <div class="pull-right">
-           <a href="add_product.php" class="btn btn-primary">Agregar producto</a>
+           <a href="add_product.php" class="btn btn-primary">Agregar material</a>
          </div>
         </div>
         <div class="panel-body">

@@ -1,5 +1,5 @@
 <?php
-  $page_title = 'Edit sale';
+  $page_title = 'Editar Ventas';
   require_once('includes/load.php');
 
    page_require_level(3);
@@ -56,10 +56,10 @@ if(!$sale){
     <div class="panel-heading clearfix">
       <strong>
         <span class="glyphicon glyphicon-th"></span>
-        <span>All Sales</span>
+        <span>Ventas</span>
      </strong>
      <div class="pull-right">
-       <a href="sales.php" class="btn btn-primary">Show all sales</a>
+       <a href="sales.php" class="btn btn-primary">Mostrar Ventas</a>
      </div>
     </div>
     <div class="panel-body">
@@ -92,7 +92,7 @@ if(!$sale){
                   <input type="date" class="form-control datepicker" name="date" data-date-format="" value="<?php echo remove_junk($sale['date']); ?>">
                 </td>
                 <td>
-                  <button type="submit" name="update_sale" class="btn btn-primary">Update sale</button>
+                  <button type="submit" name="update_sale" class="btn btn-primary">Actualizar ventas</button>
                 </td>
               </form>
               </tr>

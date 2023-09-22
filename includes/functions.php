@@ -86,7 +86,11 @@ function total_price($totals){
 /* Function for Readable date time
 /*--------------------------------------------------------------*/
 function read_date($str){
-     if($str)
+    /* if($str)
+      return date('d/m/Y g:i:s a', strtotime($str));
+     else
+      return null;*/
+      if($str)
       return date('d/m/Y g:i:s a', strtotime($str));
      else
       return null;
@@ -95,7 +99,11 @@ function read_date($str){
 /* Function for  Readable Make date time
 /*--------------------------------------------------------------*/
 function make_date(){
-  return strftime("%Y-%m-%d %H:%M:%S", time());
+  /* --return strftime("%Y-%m-%d %H:%M:%S", time());*/
+  date_default_timezone_set('America/Lima');
+  $format = "Y-m-d H:i:s"; 
+    $fecha_hora_actual = date($format);
+    return $fecha_hora_actual;
 }
 /*--------------------------------------------------------------*/
 /* Function for  Readable date time

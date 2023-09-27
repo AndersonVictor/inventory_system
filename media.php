@@ -37,10 +37,10 @@
                 <div class="input-group">
                   <label for="">Seleccionar:</label>
                   <span class="input-group-btn">
-                    <input type="file" name="file_upload" multiple="multiple" class="btn btn-primary btn-file"/>
+                    <input type="file" name="file_upload" multiple="multiple" style="margin-right: 10px; width:30px" class="btn btn-primary btn-file"/>
                  </span>
 
-                 <button type="submit" name="submit" class="btn btn-default" style="background-color: #0000 !important;">Subir</button>
+                 <button type="submit" name="submit" class="btn btn-default" style="background-color: #a7c957 !important; color: #fff; margin-left: 10px; width: 100px">Subir</button>
                </div>
               </div>
              </form>

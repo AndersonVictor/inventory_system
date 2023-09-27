@@ -53,18 +53,17 @@
         </div>
         <div class="form-group">
               <label for="level" class="control-label">Nivel del grupo</label>
-              <input type="number" class="form-control" name="group-level" value="<?php echo (int)$e_group['group_level']; ?>">
+              <input type="number" class="form-control" name="group-level" min="1" max ="2"  value="<?php echo (int)$e_group['group_level']; ?>">
         </div>
         <div class="form-group">
           <label for="status">Estado</label>
               <select class="form-control" name="status">
                 <option <?php if($e_group['group_status'] === '1') echo 'selected="selected"';?> value="1"> Activo </option>
-                <option <?php if($e_group['group_status'] === '0') echo 'selected="selected"';?> value="0">Inactivo</option>
-                <option <?php if($e_group['group_status'] === '0') echo 'selected="selected"';?> value="0">Inactivo</option>
+                <option <?php if($e_group['group_status'] === '0') echo 'selected="selected"';?> value="0">Inactivo</option>    
               </select>
         </div>
         <div class="form-group clearfix">
-                <button type="submit" name="update" class="btn btn-info">Actualizar</button>
+                <button type="submit" name="update" class="btn btn-info" style="width: 298px;">Actualizar</button>
         </div>
     </form>
 </div>

@@ -4,6 +4,9 @@
  
    page_require_level(2);
   $products = join_product_table();
+  ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 ?>
 <?php include_once('layouts/header.php'); ?>
   <div class="row">
@@ -14,7 +17,7 @@
       <div class="panel panel-default">
         <div class="panel-heading clearfix">
          <div class="pull-right">
-           <a href="add_product.php" class="btn btn-primary">Agregar material</a>
+           <a href="add_product.php" class="btn btn-primary">Agregar</a>
          </div>
         </div>
         <div class="panel-body">

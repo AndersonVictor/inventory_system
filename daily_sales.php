@@ -9,6 +9,9 @@
  $year  = date('Y');
  $month = date('m');
  $sales = dailySales($year,$month);
+ error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 ?>
 <?php include_once('layouts/header.php'); ?>
 <div class="row">

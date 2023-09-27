@@ -39,7 +39,8 @@ body{
   padding: 20px;
   background-color: #f9f9f9;
   border: 1px solid #f2f2f2;
-}.page{
+}
+.page{
   position: relative;
   display: block;
   top: 50px;
@@ -267,6 +268,8 @@ table tfoot tr td:first-child{
   -moz-box-shadow: none;
   box-shadow: none;
 }
+
+
 .btn{
   border-radius: 3px;
   -webkit-transition: all 300ms ease-in-out;
@@ -275,7 +278,7 @@ table tfoot tr td:first-child{
 }.btn-primary {
     color: #fff !important;
     background-color: #51aded;
-    border-color: #3d8fd8
+    border-color: #3d8fd8;
 }.btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active{
     color: #fff;
     background-color: #3175b8;
@@ -324,6 +327,7 @@ input[type=file]{
 
 
 
+
 /* Media query para pantallas más pequeñas */
 @media (max-width: 768px) {
   .sidebar {
@@ -353,7 +357,6 @@ input[type=file]{
     opacity: 0; /* Oculta la segunda barra del botón de hamburguesa activado */
   }
 }
-
 /* Estilos para el botón de hamburguesa */
 .menu-toggle {
   display: none;
@@ -371,3 +374,49 @@ input[type=file]{
   margin: 5px auto;
   transition: all 0.2s ease-in-out;
 }
+@media screen and (max-width: 750px) {
+  .page {
+    padding: 35px 15px 20px 30px;
+  }
+  .profile{
+      width: 50px !important;
+     margin-top: -500px;
+  }
+  .profile a.toggle span{
+    display: none !important;
+  }
+  .open>.dropdown-menu{
+    display: block;
+    margin-left: -100px
+  }
+  .hamburguer{
+    display: block;
+  }
+
+  
+}
+
+@media screen and (max-width: 550px) {
+  .info-menu li.profile{
+    position: relative;
+    top:-61px;
+}
+  .btn-secondary{
+    position: relative;
+    top: -65px;
+    right: 25px;
+    background-color: transparent !important;
+  }
+  .btn-secondary img{
+    height: 20px;
+    width: 20px;
+  }
+  .list-desp {
+    margin-top: -80px;
+  }
+
+  .btn-secondary:hover{
+    background-color: transparent !important;
+  }
+}
+

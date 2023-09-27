@@ -1,88 +1,162 @@
 <?php
   ob_start();
   require_once('includes/load.php');
-  if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
+  if($session->isUserLoggedIn(true)) { redirect('admin.php', false);}
 ?>
-<?php include_once('layouts/header.php'); ?>
+
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Tu Página de Inicio de Sesión</title>
-    <style>
-        body {
-            margin: 0; /* Evita el margen predeterminado */
-            padding: 0; /* Evita el relleno predeterminado */
-            background-image: url('../Inventario 3/libs/images/background.jpg'); 
-            background-size: cover; 
-            background-repeat: no-repeat; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+  <link rel="stylesheet" href="index.css">
+  <title>LOGIN - FERRESTOCK</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins',sans-serif;
+}
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    
+    background: url('/libs/images/background.jpg')no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.form-box{
+    position: relative;
+    width: 400px;
+    height: 450px;
+    background: transparent;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        /* Estilos para el formulario */
-        .login-page {
-            border:none !important;
-            padding: 20px;
-            border-radius: 10px;
-            width: 300px;
-        }
+}
+h2{
+    font-size: 1.5em;
+    color: #000;
+    text-align: center;
+}
+.inputbox{
+    position: relative;
+    margin: 30px 0;
+    width: 310px;
+    border-bottom: 2px solid #000;
+}
+.inputbox label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    color: #000;
+    font-size: 1em;
+    pointer-events: none;
+    transition: .5s;
+}
+input:focus ~ label,
+input:valid ~ label{
+top: -5px;
+}
+.inputbox input {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    padding:0 35px 0 5px;
+    color: #000;
+}
+.inputbox ion-icon{
+    position: absolute;
+    right: 8px;
+    color: #000;
+    font-size: 1.2em;
+    top: 20px;
+}
+.forget{
+    margin: -15px 0 15px ;
+    font-size: .9em;
+    color: #000;
+    display: flex;
+    justify-content: space-between;  
+}
 
-        .login-page h1, .login-page p {
-            text-align: center;
-        }
-
-        /* Estilos para los iconos */
-        .form-group {
-            position: relative;
-        }
-
-        .form-group .icon {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            left: 10px;
-        }
-
-        .form-group .icon i {
-            font-size: 18px;
-            color: #333;
-        }
-    </style>
+.forget label input{
+    margin-right: 3px;
+    
+}
+.forget label a{
+    color: #000;
+    text-decoration: none;
+}
+.forget label a:hover{
+    text-decoration: underline;
+}
+button{
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    background: #000;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    color: #fff;
+}
+.register{
+    font-size: .9em;
+    color: #000;
+    text-align: center;
+    margin: 25px 0 10px;
+}
+.register p a{
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+}
+.register p a:hover{
+    text-decoration: underline;
+}
+  </style>
 </head>
 <body>
-<div class="title-page">
-        <h1>SISTEMA DE INVENTARIO</h1>
-        <p>FERRESTOCK GREYS</p>
-        <center>
-        <img src="../Inventario 3/libs/images/icon.png" alt="" style="margin: auto;">
-        </center>
+    <section>
+        <div class="form-box">
+            <div class="form-value">
+            <?php echo display_msg($msg); ?>
+                <form method="post" action="auth.php">
+                    <h2>SISTEMA DE INVENTARIO</h2>
+                    <h2>FERRESTOCK GREYS</h2>
+                    <center><img src="libs/images/icon.png" alt=""></center>
+                    <div class="inputbox">
+                        <ion-icon name="person"></ion-icon>
+                        <input name="username" required>
+                        <label for="">USUARIO</label>
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                        <input type="password" name="password" required>
+                        <label for="">CONTRASEÑA</label>
+                    </div>
+                    <div class="register">
+                        <p>¿Contraseña Olvidada? <a href="#"></a></p>
+                    </div>
+                    <button>LOGIN</button>
+
+                </form>
+            </div>
         </div>
-    <div class="login-page">
-        
-        <?php echo display_msg($msg); ?>
-        <form method="post" action="auth.php" class="clearfix">
-            <div class="form-group">
-                <span class="icon"><i class="fas fa-user"></i></span>
-                <input type="text" class="form-control" name="username" placeholder="USUARIO">
-            </div>
-            <div class="form-group">
-                <span class="icon"><i class="fas fa-lock"></i></span>
-                <input type="password" name="password" class="form-control" placeholder="CONTRASEÑA">
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-info pull-right">LOGIN</button>
-            </div>
-            <span style="float:right; font-size:14px; font-weight: 700; color: #0000 !important;"><a href="">¿Contraseña Olvidada?</a></span>
-        </form>
-    </div>
-    <div class="popup-content">
-      <span class="close-button" id="closePopupButton">&times;</span>
-      <p>Comuníquese con el administrador</p>
-    </div>
+    </section>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
-
-<?php include_once('layouts/footer.php'); ?>

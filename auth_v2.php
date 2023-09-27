@@ -23,7 +23,7 @@ $password = remove_junk($_POST['password']);
              redirect('special.php',false);
            else:
               $session->msg("s", "Hello ".$user['username'].", Bienvenido al Sistema.");
-             redirect('home.php',false);
+             redirect('admin.php',false);
            endif;
 
         else:

@@ -65,12 +65,12 @@ if(!$sale){
     <div class="panel-body">
        <table class="table table-bordered">
          <thead>
-          <th> Product title </th>
-          <th> Qty </th>
-          <th> Price </th>
+          <th> Nombre de Material </th>
+          <th> Cantidad </th>
+          <th> Precio </th>
           <th> Total </th>
-          <th> Date</th>
-          <th> Action</th>
+          <th> Fecha</th>
+          <th> Acción</th>
          </thead>
            <tbody  id="product_info">
               <tr>

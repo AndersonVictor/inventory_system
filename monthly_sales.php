@@ -34,6 +34,9 @@
           <strong>
             <span class="glyphicon glyphicon-th"></span>
             <span>Ventas mensuales</span>
+            <div class="pull-right">
+              <a href="fpdf/PruebaV.php" target="_blank" class="btn btn-primary">Generar reportes</a>
+            </div>
           </strong>
         </div>
         <div class="panel-body">

@@ -26,6 +26,15 @@ ini_set('display_errors', 1);
           <strong>
             <span class="glyphicon glyphicon-th"></span>
             <span>Venta diaria</span>
+            <form action="reportePorDia.php" class="clearfix" target="_black">
+              <div class="header-date pull-left" style="display: none;">
+              <?php  date_default_timezone_set('America/Lima');?>
+              <input type="text" class="datepicker form-control" name="diaHoy" value="<?php echo date("Y/m/d");?>">
+              </div>
+              <div class="pull-right">
+                <button type="submit" name="btngenerar" class="btn btn-primary">Generar Reporte</button>
+              </div>
+            </form>
           </strong>
         </div>
         <div class="panel-body">

@@ -45,7 +45,6 @@
       </a>
       <ul class="nav submenu">
         <li><a href="sales_report.php">Ventas por fecha </a></li>
-        <li><a href="monthly_sales.php">Ventas mensuales</a></li>
         <li><a href="daily_sales.php">Ventas diarias</a> </li>
       </ul>
   </li>

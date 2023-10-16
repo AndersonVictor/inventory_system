@@ -2,7 +2,7 @@
   $page_title = 'Editar producto';
   require_once('includes/load.php');
 
-   page_require_level(2);
+   page_require_level(1);
 ?>
 <?php
 $product = find_by_id('products',(int)$_GET['id']);
@@ -79,7 +79,7 @@ if(!$product){
               </div>
               <div class="form-group">
                 <div class="row">
-                  <div class="col-md-6" style="width: 270px !important;">
+                  <div class="col-md-6" style="width: 215px !important;">
                     <select class="form-control" name="product-categorie" >
                     <option value="">Selecciona una categoría</option>
                    <?php  foreach ($all_categories as $cat): ?>
@@ -88,7 +88,7 @@ if(!$product){
                    <?php endforeach; ?>
                  </select>
                   </div>
-                  <div class="col-md-6" style="width: 270px !important;">
+                  <div class="col-md-6" style="width: 220px !important;">
                     <select class="form-control" name="product-photo">
                       <option value=""> Sin imagen</option>
                       <?php  foreach ($all_photo as $photo): ?>
@@ -97,7 +97,7 @@ if(!$product){
                       <?php endforeach; ?>
                     </select>
                   </div>
-                  <div class="col-md-6" style="width: 270px !important;">
+                  <div class="col-md-6" style="width: 220px !important;">
                     <select class="form-control" name="product-supplier">
                     <option value="">Selecciona un proveedor</option>
                    <?php  foreach ($all_supplier as $sup): ?>

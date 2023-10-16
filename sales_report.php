@@ -17,17 +17,17 @@ $page_title = 'Reporte de ventas';
 
       </div>
       <div class="panel-body">
-          <form class="clearfix" method="post" action="sale_report_process.php">
+          <form class="clearfix"  action="reportePorFecha.php" target="_black">
             <div class="form-group">
               <label class="form-label">Rango de fechas</label>
                 <div class="input-group">
-                  <input type="text" class="datepicker form-control" name="start-date" placeholder="From">
+                  <input required type="text" class="datepicker form-control" name="start-date" placeholder="From">
                   <span class="input-group-addon"><i class="glyphicon glyphicon-menu-right"></i></span>
-                  <input type="text" class="datepicker form-control" name="end-date" placeholder="To">
+                  <input required type="text" class="datepicker form-control" name="end-date" placeholder="To">
                 </div>
             </div>
             <div class="form-group">
-                 <button type="submit" name="submit" class="btn btn-primary">Generar Reporte</button>
+                 <button type="submit" name="btngenerar" class="btn btn-primary">Generar Reporte</button>
             </div>
           </form>
       </div>

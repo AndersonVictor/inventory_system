@@ -1,5 +1,5 @@
 <?php
-  require_once('includes/load.php');
+  require_once('includeS/load.php');
 
 /*--------------------------------------------------------------*/
 /* Function for find all database table rows by table name
@@ -196,11 +196,13 @@ function tableExists($table){
            $session->msg('d','Este nivel de usaurio esta inactivo!');
            redirect('home.php',false);
       //cheackin log in User level and Require level is Less than or equal to
+      elseif($login_level['user_level'] === '2'):
+        redirect('sales.php',true);
      elseif($current_user['user_level'] <= (int)$require_level):
               return true;
       else:
-            $session->msg("d", "¡Lo siento!  no tienes permiso para ver la página.");
-            redirect('home.php', false);
+            //$session->msg("d", "¡Lo siento!  no tienes permiso para ver la página.");
+            redirect('sales.php', false);
         endif;
 
      }
@@ -385,4 +387,15 @@ function monthlySales($year){
     return $productosConStockBajo;   
   }
 /*************************************************************/
+function reportVentas($inicioFecha,$finFecha){
+  global $db;
+   $sql  = "SELECT s.id,p.name,p.sale_price,s.qty,s.price,s.date";
+   $sql .= " FROM sales s";
+   $sql .= " INNER JOIN products p ON s.product_id = p.id";
+   $sql .= " WHERE s.date BETWEEN '{$inicioFecha}' AND '{$finFecha}'";
+   return find_by_sql($sql);  
+}
+
+/*************************************************************/
 ?>
+

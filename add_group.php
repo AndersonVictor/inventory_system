@@ -55,7 +55,7 @@
         </div>
         <div class="form-group">
               <label for="level" class="control-label">Nivel del grupo</label>
-              <input type="number" class="form-control" name="group-level">
+              <input type="number" id="groupLevel" class="form-control" name="group-level" min="0" max="2">
         </div>
         <div class="form-group">
           <label for="status">Estado</label>
@@ -68,6 +68,19 @@
                 <button type="submit" name="add" class="btn btn-info">Guardar</button>
         </div>
     </form>
+    <script>
+        const input = document.getElementById('groupLevel');
+
+input.addEventListener('input', function() {
+    const valor = parseFloat(this.value);
+
+    if (isNaN(valor) || valor < 0) {
+        this.value = 0; // Si el valor es menor que 0 o no es un número válido, establece el valor en 0
+    } else if (valor > 2) {
+        this.value = 2; // Si el valor es mayor que 2, establece el valor en 2
+    }
+});
+    </script>
 </div>
 
 <?php include_once('layouts/footer.php'); ?>

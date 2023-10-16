@@ -1,5 +1,5 @@
 <?php
-  $page_title = 'Agregar producto';
+  $page_title = 'Agregar material';
   require_once('includes/load.php');
   
   page_require_level(2);
@@ -58,7 +58,7 @@
         <div class="panel-heading">
           <strong>
             <span class="glyphicon glyphicon-th"></span>
-            <span>Agregar producto</span>
+            <span>Agregar material</span>
          </strong>
         </div>
         <div class="panel-body">
@@ -74,7 +74,7 @@
               </div>
               <div class="form-group">
                 <div class="row">
-                  <div class="col-md-6" style="width: 300px !important;">
+                  <div class="col-md-6" style="width: 268px !important;">
                     <select class="form-control" name="product-categorie">
                       <option value="">Selecciona una categoría</option>
                     <?php  foreach ($all_categories as $cat): ?>
@@ -83,7 +83,7 @@
                     <?php endforeach; ?>
                     </select>
                   </div>
-                  <div class="col-md-6" style="width: 300px !important;">
+                  <div class="col-md-6" style="width: 268px !important;">
                     <select class="form-control" name="product-photo">
                       <option value="">Selecciona una imagen</option>
                     <?php  foreach ($all_photo as $photo): ?>
@@ -92,7 +92,7 @@
                     <?php endforeach; ?>
                     </select>
                   </div>
-                  <div class="col-md-6" style="width: 300px !important;">
+                  <div class="col-md-6" style="width: 268px !important;">
                     <select class="form-control" name="product-supplier">
                       <option value="">Selecciona un proveedor</option>
                     <?php  foreach ($all_supplier as $sup): ?>
@@ -134,7 +134,7 @@
                   </div>
                </div>
               </div>
-              <button type="submit" name="add_product" class="btn btn-danger">Agregar producto</button>
+              <button type="submit" name="add_product" class="btn btn-danger">Agregar material</button>
           </form>
          </div>
         </div>

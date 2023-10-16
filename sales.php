@@ -30,7 +30,7 @@ $sales = find_all_sale();
             <thead>
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>
-                <th> Nombre del producto </th>
+                <th> Nombre del material </th>
                 <th class="text-center" style="width: 15%;"> Cantidad</th>
                 <th class="text-center" style="width: 15%;"> Total </th>
                 <th class="text-center" style="width: 15%;"> Fecha </th>

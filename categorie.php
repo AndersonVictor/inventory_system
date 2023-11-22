@@ -1,31 +1,60 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <?php
   $page_title = 'Lista de categorías';
-  require_once('includes/load.php');
+  require_once('Controllers/load.php');
 
   page_require_level(1);
   
   $all_categories = find_all('categories')
 ?>
+
 <?php
- if(isset($_POST['add_cat'])){
-   $req_field = array('categorie-name');
-   validate_fields($req_field);
-   $cat_name = remove_junk($db->escape($_POST['categorie-name']));
-   if(empty($errors)){
-      $sql  = "INSERT INTO categories (name)";
-      $sql .= " VALUES ('{$cat_name}')";
-      if($db->query($sql)){
-        $session->msg("s", "Categoría agregada exitosamente.");
-        redirect('categorie.php',false);
+  if (isset($_POST['add_cat'])) {
+    $req_field = array('categorie-name');
+    validate_fields($req_field);
+    $cat_name = $_POST['categorie-name'];
+  
+    // Verificar si la categoría ya existe
+    if (!empty($cat_name)) {
+      $existing_categories = array_column($all_categories, 'name');
+  
+      // Eliminar espacios en blanco al principio y al final
+      $cat_name = trim($cat_name);
+  
+      if (in_array($cat_name, $existing_categories)) {
+        $session->msg("d", "La categoría ya existe.");
+        redirect('categorie.php', false);
+        exit; // Agregamos una salida para detener la ejecución del código
       } else {
-        $session->msg("d", "Lo siento, registro falló");
-        redirect('categorie.php',false);
+        // Comprobar si el nombre de categoría contiene solo espacios en blanco
+        if (strlen($cat_name) == 0) {
+          $session->msg("d", "No se permiten espacios en blanco.");
+          redirect('categorie.php', false);
+          exit; // Salir para evitar el registro
+        }
+  
+        // Registro y la verificación si el campo no se halla ingresado
+        if (empty($errors)) {
+          $sql  = "INSERT INTO categories (name)";
+          $sql .= " VALUES ('{$db->escape($cat_name)}')";
+          if ($db->query($sql)) {
+            $session->msg("s", "Categoría agregada exitosamente.");
+            redirect('categorie.php', false);
+          } else {
+            $session->msg("d", "Lo siento, registro falló");
+            redirect('categorie.php', false);
+          }
+        } else {
+          $session->msg("d", $errors);
+          redirect('categorie.php', false);
+        }
       }
-   } else {
-     $session->msg("d", $errors);
-     redirect('categorie.php',false);
-   }
- }
+    } else {
+      $session->msg("d", "El nombre de la categoría no puede estar vacío.");
+      redirect('categorie.php', false);
+    }
+  }
+  
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -46,8 +75,17 @@
         <div class="panel-body">
           <form method="post" action="categorie.php">
             <div class="form-group">
-                <input type="text" class="form-control" name="categorie-name" placeholder="Nombre de la categoría" required>
+                <input type="text" class="form-control" name="categorie-name" 
+                placeholder="Nombre de la categoría" required maxlength="60" 
+                autocomplete="off" oninput="formatInput(this)">
             </div>
+            <script>
+              function formatInput(input) {
+                let text = input.value;
+                text = text.charAt(0).toUpperCase() + text.slice(1);  // Capitaliza la primera letra
+                input.value = text;
+              }                 
+            </script>
             <button type="submit" name="add_cat" class="btn btn-primary">Agregar categoría</button>
         </form>
         </div>
@@ -95,4 +133,10 @@
     </div>
    </div>
   </div>
+  <script language="javascript" type="text/javascript">
+  function removeSpaces(string) {
+    
+    return string.split(' ').join('');
+  }
+</script>
   <?php include_once('layouts/footer.php'); ?>

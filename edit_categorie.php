@@ -1,6 +1,6 @@
 <?php
   $page_title = 'Editar categoría';
-  require_once('includes/load.php');
+  require_once('Controllers/load.php');
 
   page_require_level(1);
 ?>
@@ -52,7 +52,7 @@ if(isset($_POST['edit_cat'])){
        <div class="panel-body">
          <form method="post" action="edit_categorie.php?id=<?php echo (int)$categorie['id'];?>">
            <div class="form-group">
-               <input type="text" class="form-control" name="categorie-name" value="<?php echo remove_junk(ucfirst($categorie['name']));?>">
+               <input type="text" class="form-control" name="categorie-name" value="<?php echo remove_junk(ucfirst($categorie['name']));?>" maxlength="60" autocomplete="off">
            </div>
            <button type="submit" name="edit_cat" class="btn btn-primary">Actualizar categoría</button>
        </form>

@@ -1,6 +1,6 @@
 <?php
   $page_title = 'Lista de grupos';
-  require_once('includes/load.php');
+  require_once('Controllers/load.php');
   
    page_require_level(1);
   $all_groups = find_all('user_groups');

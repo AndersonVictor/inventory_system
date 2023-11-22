@@ -1,6 +1,6 @@
 <?php
   $page_title = 'Lista de proveedores';
-  require_once('includes/load.php');
+  require_once('Controllers/load.php');
   header('Content-Type: text/html; charset=UTF-8');
    page_require_level(2);
   $suppliers = join_supplier_table();

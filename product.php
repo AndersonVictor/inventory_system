@@ -1,6 +1,6 @@
 <?php
   $page_title = 'Lista de materiales';
-  require_once('includes/load.php');
+  require_once('Controllers/load.php');
  
    page_require_level(2);
   $products = join_product_table();

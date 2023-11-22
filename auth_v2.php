@@ -1,4 +1,4 @@
-<?php include_once('includes/load.php'); ?>
+<?php include_once('Controllers/load.php'); ?>
 <?php
 $req_fields = array('username','password' );
 validate_fields($req_fields);

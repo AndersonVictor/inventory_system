@@ -1,6 +1,6 @@
 <?php
 $page_title = 'Reporte de ventas';
-  require_once('includes/load.php');
+  require_once('Controllers/load.php');
 
    page_require_level(3);
 ?>

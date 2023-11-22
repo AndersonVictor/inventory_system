@@ -11,7 +11,7 @@
 </html>
 <?php
   $page_title = 'Ventas mensuales';
-  require_once('includes/load.php');
+  require_once('Controllers/load.php');
   error_reporting(E_ALL);
   ini_set('display_errors', 1);
    page_require_level(3);

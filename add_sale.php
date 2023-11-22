@@ -1,6 +1,6 @@
 <?php
   $page_title = 'Agregar venta';
-  require_once('includes/load.php');
+  require_once('Controllers/load.php');
 
    page_require_level(3);
 ?>

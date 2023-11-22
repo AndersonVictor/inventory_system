@@ -1,5 +1,5 @@
 <?php
-   require_once('includes/load.php');
+   require_once('Controllers/load.php');
    require('fpdf/fpdf.php');
    $fechaInicio=$_GET["diaHoy"];
    $fechaFinal=$_GET["diaHoy"];

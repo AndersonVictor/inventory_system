@@ -1,6 +1,6 @@
 <?php
   $page_title = 'Editar proveedor';
-  require_once('includes/load.php');
+  require_once('Controllers/load.php');
 
    page_require_level(2);
 ?>
@@ -62,7 +62,7 @@ $supplier = find_by_id('supplier',(int)$_GET['id']);
                   <span class="input-group-addon">
                    <i class="glyphicon glyphicon-home"></i>
                   </span>
-                  <input type="text" class="form-control" name="supplier-title" value="<?php echo remove_junk($supplier['name']);?>">
+                  <input type="text" class="form-control" name="supplier-title" value="<?php echo remove_junk($supplier['name']);?>" maxlength="30" autocomplete="off">
                </div>
               </div>
               <div class="form-group">
@@ -70,7 +70,7 @@ $supplier = find_by_id('supplier',(int)$_GET['id']);
                   <span class="input-group-addon">
                    <i class="glyphicon glyphicon-map-marker"></i>
                   </span>
-                  <input type="text" class="form-control" name="address" value="<?php echo remove_junk($supplier['address']);?>">
+                  <input type="text" class="form-control" name="address" value="<?php echo remove_junk($supplier['address']);?>" maxlength="35" autocomplete="off">
                </div>
               </div>
               <div class="form-group">
@@ -78,17 +78,35 @@ $supplier = find_by_id('supplier',(int)$_GET['id']);
                   <span class="input-group-addon">
                    <i class="glyphicon glyphicon-earphone"></i>
                   </span>
-                  <input type="text" class="form-control" name="phone" value="<?php echo remove_junk($supplier['phone']);?>">
+                  <input type="text" class="form-control" id="phone"name="phone" value="<?php echo remove_junk($supplier['phone']);?>" autocomplete="off">
                </div>
               </div>
+              <script>
+                  document.addEventListener("DOMContentLoaded", function() {
+                    // Seleccionar el campo de entrada
+                    var phoneInput = document.getElementById("phone");
+                    // Agregar un controlador de eventos para el evento de entrada (input)
+                    phoneInput.addEventListener("input", function() {
+                      // Eliminar caracteres no numéricos
+                      var inputValue = phoneInput.value.replace(/\D/g, "");
+
+                      // Limitar la longitud a 9 caracteres
+                      if (inputValue.length > 9) {
+                        inputValue = inputValue.slice(0, 9);
+                      }
+
+                      phoneInput.value = inputValue;
+                    });
+                  });
+              </script>                
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">
                    <i class="glyphicon glyphicon-envelope"></i>
                   </span>
-                  <input type="text" class="form-control" name="email" value="<?php echo remove_junk($supplier['email']);?>">
+                  <input type="email" class="form-control" name="email" value="<?php echo remove_junk($supplier['email']);?>" maxlength="30" autocomplete="off">
                </div>
-              </div>
+              </div>              
               <button type="submit" name="supplier" class="btn btn-danger">Actualizar</button>
           </form>
          </div>

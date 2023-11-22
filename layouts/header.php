@@ -108,7 +108,7 @@
      
   <div class="pull-right clearfix" id="notificacion" onclick="mostrarProductosBajos()">
         <?php
-          require_once('includes/load.php');
+          require_once('Controllers/load.php');
           $productosConStockBajo = productosStockBajo();        
         ?>       
         <button class="btn btn-secondary"><img src="./libs/images/figure.png" width="32" height="32" alt="">

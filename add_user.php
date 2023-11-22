@@ -1,6 +1,6 @@
 <?php
   $page_title = 'Agregar usuarios';
-  require_once('includes/load.php');
+  require_once('Controllers/load.php');
 
   page_require_level(1);
   $groups = find_all('user_groups');
@@ -11,12 +11,40 @@
    $req_fields = array('full-name','username','password','level' );
    validate_fields($req_fields);
 
+  //Validar que no se repitan usuarios a traves del nombre
+    $all_users = find_all('users');
+
    if(empty($errors)){
-           $name   = remove_junk($db->escape($_POST['full-name']));
+       $name   = remove_junk($db->escape($_POST['full-name']));
        $username   = remove_junk($db->escape($_POST['username']));
        $password   = remove_junk($db->escape($_POST['password']));
        $user_level = (int)$db->escape($_POST['level']);
        $password = sha1($password);
+       //Variable
+       $sup_name = $_POST['full-name'];
+       // Verificar si el usuario ya existe  
+       // Asume que $all_users contiene todos los usuarios
+       if(!empty($sup_name)) {
+        $existing_providers = array_column($all_users, 'name');   
+        // Eliminar espacios en blanco al principio y al final
+       $sup_name = trim($sup_name);  
+       //************************************************** */
+       if (in_array($sup_name, $existing_providers)) {
+        $session->msg("d", "El usuario ya existe.");
+        redirect('add_user.php', false);
+        exit; // Agregamos una salida para detener la ejecución del código
+      } else {
+        // Comprobar si el nombre del proveedor contiene solo espacios en blanco
+        if (strlen($sup_name) == 0) {
+          $session->msg("d", "No se permiten espacios en blanco.");
+          redirect('add_user.php', false);
+          exit; // Salir para evitar el registro
+        }
+      }  
+     }else {
+        $session->msg("d", "El nombre del usuario no puede estar vacío.");
+        redirect('add_user.php', false);
+      }               
         $query = "INSERT INTO users (";
         $query .="name,username,password,user_level,status";
         $query .=") VALUES (";
@@ -52,8 +80,16 @@
           <form method="post" action="add_user.php">
             <div class="form-group">
                 <label for="name">Nombre</label>
-                <input type="text" class="form-control" name="full-name" placeholder="Nombre completo" required>
+                <input type="text" class="form-control" name="full-name" placeholder="Nombre completo" 
+                oninput="formatInput(this)" required>
             </div>
+            <script>
+              function formatInput(input) {
+                let text = input.value;
+                text = text.charAt(0).toUpperCase() + text.slice(1);  // Capitaliza la primera letra
+                input.value = text;
+              }                 
+            </script>               
             <div class="form-group">
                 <label for="username">Usuario</label>
                 <input type="text" class="form-control" name="username" placeholder="Nombre de usuario">

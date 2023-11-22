@@ -1,6 +1,6 @@
 <?php
   $page_title = 'Editar producto';
-  require_once('includes/load.php');
+  require_once('Controllers/load.php');
 
    page_require_level(1);
 ?>
@@ -16,40 +16,46 @@ if(!$product){
 ?>
 <?php
  if(isset($_POST['product'])){
-    $req_fields = array('product-title','product-categorie','product-quantity','buying-price', 'saleing-price', 'product-supplier');
-    validate_fields($req_fields);
+  $req_fields = array('product-title','product-categorie','product-quantity','buying-price', 'saleing-price', 'product-supplier');
+  validate_fields($req_fields);
 
-   if(empty($errors)){
-       $p_name  = remove_junk($db->escape($_POST['product-title']));
-       $p_cat   = (int)$_POST['product-categorie'];
-       $p_qty   = remove_junk($db->escape($_POST['product-quantity']));
-       $p_buy   = remove_junk($db->escape($_POST['buying-price']));
-       $p_sale  = remove_junk($db->escape($_POST['saleing-price']));
-       $p_supplier  = remove_junk($db->escape($_POST['product-supplier']));
-       if (is_null($_POST['product-photo']) || $_POST['product-photo'] === "") {
-         $media_id = '0';
-       } else {
-         $media_id = remove_junk($db->escape($_POST['product-photo']));
-       }
-       $query   = "UPDATE products SET";
-       $query  .=" name ='{$p_name}', quantity ='{$p_qty}',";
-       $query  .=" buy_price ='{$p_buy}', sale_price ='{$p_sale}', categorie_id ='{$p_cat}',media_id='{$media_id}',supplier_id='{$p_supplier}'";
-       $query  .=" WHERE id ='{$product['id']}'";
-       $result = $db->query($query);
-               if($result && $db->affected_rows() === 1){
-                 $session->msg('s',"El material ha sido actualizado. ");
-                 redirect('product.php', false);
-               } else {
-                 $session->msg('d',' Lo siento, actualización falló.');
-                 redirect('edit_product.php?id='.$product['id'], false);
-               }
+ if(empty($errors)){
+     $p_name  = remove_junk($db->escape($_POST['product-title']));
+     $p_cat   = (int)$_POST['product-categorie'];
+     $p_qty   = remove_junk($db->escape($_POST['product-quantity']));
+     $p_buy   = remove_junk($db->escape($_POST['buying-price']));
+     $p_sale  = remove_junk($db->escape($_POST['saleing-price']));
+     $p_supplier  = remove_junk($db->escape($_POST['product-supplier']));
+     if (is_null($_POST['product-photo']) || $_POST['product-photo'] === "") {
+       $media_id = '0';
+     } else {
+       $media_id = remove_junk($db->escape($_POST['product-photo']));
+     }
+     $query   = "UPDATE products SET";
+     $query  .=" name ='{$p_name}', quantity ='{$p_qty}',";
+     $query  .=" buy_price ='{$p_buy}', sale_price ='{$p_sale}', categorie_id ='{$p_cat}',media_id='{$media_id}',supplier_id='{$p_supplier}'";
+     $query  .=" WHERE id ='{$product['id']}'";
+     $result = $db->query($query);
+        if ($result) {
+          if ($db->affected_rows() === 1) {
+              $session->msg('s', "El material ha sido actualizado.");
+              redirect('product.php', false);
+          } else {
+              $session->msg('w', 'No se realizaron cambios.');
+              redirect('product.php?id=' . $product['id'], false);
+          }
+  } else {
+      $session->msg('d', 'Error al ejecutar la consulta de actualización. Error: ' . $db->error);
+      redirect('edit_product.php?id=' . $product['id'], false);
+  }
 
-   } else{
-       $session->msg("d", $errors);
-       redirect('edit_product.php?id='.$product['id'], false);
-   }
-
+ } else{
+     $session->msg("d", $errors);
+     redirect('edit_product.php?id='.$product['id'], false);
  }
+
+}
+
 
 ?>
 <?php include_once('layouts/header.php'); ?>
@@ -74,9 +80,10 @@ if(!$product){
                   <span class="input-group-addon">
                    <i class="glyphicon glyphicon-th-large"></i>
                   </span>
-                  <input type="text" class="form-control" name="product-title" value="<?php echo remove_junk($product['name']);?>">
+                  <input type="text" class="form-control" name="product-title" value="<?php echo remove_junk($product['name']);?>"
+                  >
                </div>
-              </div>
+              </div>              
               <div class="form-group">
                 <div class="row">
                   <div class="col-md-6" style="width: 215px !important;">
@@ -101,10 +108,12 @@ if(!$product){
                     <select class="form-control" name="product-supplier">
                     <option value="">Selecciona un proveedor</option>
                    <?php  foreach ($all_supplier as $sup): ?>
-                     <option value="<?php echo (int)$sup['id']; ?>" <?php if($supplier['supplier_id'] === $sup['id']): echo "selected"; endif; ?> >
+                    
+                     <option value="<?php echo (int)$sup['id']; ?>" <?php if($product['supplier_id'] === $sup['id']): echo "selected"; endif; ?> >
                        <?php echo remove_junk($sup['name']); ?></option>
                    <?php endforeach; ?>
                  </select>
+                 
                   </div>
                 </div>
               </div>
@@ -119,7 +128,7 @@ if(!$product){
                        <i class="glyphicon glyphicon-shopping-cart"></i>
                       </span>
                       <span>Almacen</span><input type="number" class="form-control" id ="existingQuantity" name="existingQuantity" readonly value="<?php echo remove_junk($product['quantity']); ?>"> <hr>
-                      <span>Nuevo</span><input type="number" class="form-control"  id="new-product-quantity" name="new-product-quantity" min="0"> <hr>
+                      <span>Nuevo</span><input type="number" class="form-control" id="new-product-quantity" name="new-product-quantity" min="0" value="0"> <hr>
                       <span>TOTAL:</span><input type="number" class="form-control" name="product-quantity" id="total-quantity" readonly>             
                    </div>
                   </div>
@@ -173,5 +182,8 @@ if(!$product){
 
     existingQuantityInput.addEventListener('input', calcularCantidadTotal);
     newQuantityInput.addEventListener('input', calcularCantidadTotal);
+
+    // Llama a la función al cargar la página para calcular el total inicial
+    calcularCantidadTotal();
 </script>
 

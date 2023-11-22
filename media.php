@@ -1,24 +1,38 @@
 <?php
   $page_title = 'Lista de imagenes';
-  require_once('includes/load.php');
+  require_once('Controllers/load.php');
 
   page_require_level(2);
 ?>
 <?php $media_files = find_all('media');?>
+
+
 <?php
-  if(isset($_POST['submit'])) {
+if(isset($_POST['submit'])) {
   $photo = new Media();
-  $photo->upload($_FILES['file_upload']);
-    if($photo->process_media()){
-        $session->msg('s','Imagen subida al servidor.');
-        redirect('media.php');
-    } else{
-      $session->msg('d',join($photo->errors));
+
+  // Obtén la extensión del archivo
+  $file_extension = pathinfo($_FILES['file_upload']['name'], PATHINFO_EXTENSION);
+  if (empty($_FILES['file_upload']['name'])) {
+    $session->msg('d', 'Ningún archivo fue subido.');
+    redirect('media.php');
+  }
+  // Verifica que la extensión sea jpg o png
+  if (in_array($file_extension, array('jpg', 'png'))) {
+    $photo->upload($_FILES['file_upload']);
+
+    if ($photo->process_media()) {
+      $session->msg('s', 'Imagen subida al servidor.');
+      redirect('media.php');
+    } else {
+      $session->msg('d', join($photo->errors));
       redirect('media.php');
     }
-
+  } else {
+    $session->msg('d', 'Solo se permiten archivos JPG o PNG.');
+    redirect('media.php');
   }
-
+}
 ?>
 <?php include_once('layouts/header.php'); ?>
      <div class="row">

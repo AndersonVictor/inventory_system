@@ -1,6 +1,6 @@
 <?php
   ob_start();
-  require_once('includes/load.php');
+  require_once('iControllers/load.php');
   if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
 ?>
 
